@@ -5,6 +5,12 @@ install package name psycopg2 using pip
 then go to inner application folder and to setting.py and change the database to postgreSQL
 
 create model than make migration
-py manage.py makemigration
+py manage.py makemigrations
 then
 py manage.py migrate
+
+
+CREATE ADMIN 
+py manage.py createsuperuser
+then run server
+then go to admin page
