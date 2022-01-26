@@ -5,16 +5,18 @@
     	<!-- banner Start -->
     	<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 		  <div class="carousel-inner">
-		    <div class="carousel-item active">
-		      <img src="imgs/21.jpg" class="d-block w-100" alt="Slide 1">
+			{% for banner in banners %}
+		    <div class="carousel-item {% if forloop.counter == 1 %} active {% endif %}">
+		      <img src="{{banner.img.url}}" class="d-block w-100" alt="Slide 1">
 		    </div>
-		    <div class="carousel-item">
+			{% endfor %}
+		    <!-- <div class="carousel-item">
 		      <img src="imgs/22.jpg" class="d-block w-100" alt="Slide 1">
 		    </div>
 		    <div class="carousel-item">
 		      <img src="imgs/23.jpg" class="d-block w-100" alt="Slide 1">
 		    </div>
-		  </div>
+		  </div> -->
 		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 		    <span class="visually-hidden">Previous</span>
