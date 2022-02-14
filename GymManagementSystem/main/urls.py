@@ -7,7 +7,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('pagedetail/<int:id>', views.page_detail, name='pagedetail'),
+    path('faq/', views.faq, name='faq'),
+    path('enquiry/', views.enquiry, name='enquiry'),
 ]
 
+# ye samaj nhi aya
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

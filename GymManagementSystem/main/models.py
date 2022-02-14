@@ -6,6 +6,7 @@ from django.utils.html import mark_safe
 
 # Create your models here.
 
+# banner table to store image and alt_text for image
 class Banners(models.Model):
     img = models.ImageField(upload_to='banners/')
     alt_text = models.CharField(max_length=150)
@@ -17,6 +18,7 @@ class Banners(models.Model):
         return mark_safe('<img src="%s" width="80" />' % (self.img.url))
 
 
+# service table to store title, detail and image
 class Service(models.Model):
     title = models.CharField(max_length=150)
     detail = models.TextField()
@@ -27,3 +29,30 @@ class Service(models.Model):
 
     def image_tag(self):
         return mark_safe('<img src="%s" width="80" />' % (self.img.url))
+
+
+# pages
+class Page(models.Model):
+    title = models.CharField(max_length=200)
+    detail = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+# faq
+class Faq(models.Model):
+    question = models.TextField()
+    ans = models.TextField()
+
+    def __str__(self):
+        return self.question
+
+# Enquiry
+class Enquiry(models.Model):
+    name = models.CharField(max_length=150)
+    email = models.EmailField(max_length=150)
+    detail = models.TextField()
+    send_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
