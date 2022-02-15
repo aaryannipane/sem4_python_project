@@ -24,7 +24,7 @@ def faq(req):
 
 # Enquiry form page
 def enquiry(req):
-    # nhi samja
+    # handling post method from form 
     msg = ''
     if req.method == 'POST':
         form = forms.EnquiryForm(req.POST)
@@ -33,6 +33,17 @@ def enquiry(req):
             msg = 'data has been saved'
 
     form = forms.EnquiryForm
-    print(form)
     return render(req, 'enquiry.html', {'form':form, 'msg':msg})
 
+# show galleries
+def gallery(req):
+    gallery = models.Gallery.objects.all().order_by('-id')
+    return render(req, 'gallery.html', {'galleries':gallery})
+
+# show galleries detail
+def gallery_detail(req, id):
+    # fetch title of gallery with their id
+    gallery = models.Gallery.objects.get(id=id)
+    # get only object containing that gallery in decending order
+    galleryImages = models.GalleryImage.objects.filter(gallery=gallery).order_by('-id')
+    return render(req, 'gallery_images.html', {'galleryImages':galleryImages, 'gallery':gallery})

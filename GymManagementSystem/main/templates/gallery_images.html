@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Main Start -->
+<main>
+    <!-- Services -->
+    <section class="container my-4">
+        <h1 class="text-center mb-4 section-heading border-bottom pb-2">{{gallery.title}} Images</h1>
+        <div class="row">
+          {% for galleryImage in galleryImages %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img src="{{galleryImage.img.url}}" class="card-img-top" alt="galleryImage.alt_text">
+                  <!-- <div class="card-body">
+                    <h5 class="card-title">{{gallery.title}}</h5>
+                    <p class="card-text">{{gallery.detail}}</p>
+                    <a href="#" class="btn btn-primary">View All</a>
+                  </div> -->
+                </div>
+            </div>
+          {% endfor %}
+        </div>
+    </section>
+    <!-- End -->
+</main>
+<!-- End -->
+
+{% endblock content %}

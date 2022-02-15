@@ -2,7 +2,7 @@ from attr import field
 from django import forms
 from . import models
 
-# nhi samja
+# this is model form use to make form from model(database table)
 class EnquiryForm(forms.ModelForm):
     class Meta:
         model = models.Enquiry

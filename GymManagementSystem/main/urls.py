@@ -10,6 +10,8 @@ urlpatterns = [
     path('pagedetail/<int:id>', views.page_detail, name='pagedetail'),
     path('faq/', views.faq, name='faq'),
     path('enquiry/', views.enquiry, name='enquiry'),
+    path('gallery/', views.gallery, name='gallery'),
+    path('gallerydetail/<int:id>', views.gallery_detail, name='gallerydetail'),
 ]
 
 # ye samaj nhi aya
