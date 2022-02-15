@@ -90,7 +90,7 @@ class SubPlan(models.Model):
     title = models.CharField(max_length=150)
     price = models.IntegerField()
 
-    def _str__(self):
+    def __str__(self):
         return self.title
 
 # subscription features in plan
@@ -98,5 +98,5 @@ class SubPlanFeature(models.Model):
     subplan = models.ForeignKey(SubPlan, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=150)
     
-    def _str__(self):
+    def __str__(self):
         return self.title
