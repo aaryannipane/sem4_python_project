@@ -23,6 +23,7 @@
       <div class="card-body">
         <h1 class="card-title pricing-card-title">₹{{ plan.price }}<small class="text-muted fw-light">/mo</small></h1>
         <ul class="list-unstyled mt-3 mb-4">
+            <!-- nhi samja -->
           {% for feature in plan.subplanfeature_set.all %}
             <li>{{ feature.title }}</li>
           {% endfor %}
