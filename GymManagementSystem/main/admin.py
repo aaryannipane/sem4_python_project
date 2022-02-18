@@ -33,9 +33,12 @@ class GalleryImageAdmin(admin.ModelAdmin):
 admin.site.register(models.GalleryImage, GalleryImageAdmin)
 
 class SubPlanAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'id']
+    list_editable = ['highlight_status',]
+    list_display = ['title', 'price', 'id', 'highlight_status']
 admin.site.register(models.SubPlan, SubPlanAdmin)
 
 class SubPlanFeatureAdmin(admin.ModelAdmin):
-    list_display = ['title']
+    list_display = ['title', 'subplans']
+    def subplans(self, obj):
+        return " | ".join([sub.title for sub in obj.subplan.all()])
 admin.site.register(models.SubPlanFeature, SubPlanFeatureAdmin)

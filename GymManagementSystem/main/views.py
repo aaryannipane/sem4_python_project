@@ -47,3 +47,10 @@ def gallery_detail(req, id):
     # get only object containing that gallery in decending order
     galleryImages = models.GalleryImage.objects.filter(gallery=gallery).order_by('-id')
     return render(req, 'gallery_images.html', {'galleryImages':galleryImages, 'gallery':gallery})
+
+
+# subscription plan
+def pricing(req):
+    plans = models.SubPlan.objects.all()
+    dfeature = models.SubPlanFeature.objects.all()
+    return render(req, 'pricing.html', {'plans':plans, 'dfeature':dfeature})

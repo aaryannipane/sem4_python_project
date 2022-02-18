@@ -2,6 +2,7 @@ from distutils.command.upload import upload
 from turtle import title
 from django.db import models
 from django.utils.html import mark_safe
+from pygments import highlight
 
 
 # Create your models here.
@@ -89,13 +90,15 @@ class GalleryImage(models.Model):
 class SubPlan(models.Model):
     title = models.CharField(max_length=150)
     price = models.IntegerField()
+    highlight_status = models.BooleanField(default=False, null=True)
 
     def __str__(self):
         return self.title
 
 # subscription features in plan
 class SubPlanFeature(models.Model):
-    subplan = models.ForeignKey(SubPlan, on_delete=models.CASCADE, null=True)
+    # subplan = models.ForeignKey(SubPlan, on_delete=models.CASCADE, null=True)
+    subplan = models.ManyToManyField(SubPlan)
     title = models.CharField(max_length=150)
     
     def __str__(self):

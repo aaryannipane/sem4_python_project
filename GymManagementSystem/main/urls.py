@@ -12,6 +12,7 @@ urlpatterns = [
     path('enquiry/', views.enquiry, name='enquiry'),
     path('gallery/', views.gallery, name='gallery'),
     path('gallerydetail/<int:id>', views.gallery_detail, name='gallerydetail'),
+    path('pricing/', views.pricing, name='pricing')
 ]
 
 # ye samaj nhi aya
