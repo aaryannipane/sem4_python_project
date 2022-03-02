@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" integrity="sha512-Oy+sz5W86PK0ZIkawrG0iv7XwWhYecM3exvUtMKNJMekGFJtVAhibhRPTpmyTj8+lJCkmWfnpxKgT2OopquBHA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- jquery -->
     <!-- <script src="assets/jquery-3.6.0.min.js"></script> -->
+	<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
     <title>Home - ATMA GYM</title>
   </head>
   <body>
@@ -32,7 +33,7 @@
 	          <a class="nav-link" aria-current="page" href="{% url 'gallery' %}">Gallery</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="pricing.php">Pricing</a>
+	          <a class="nav-link" href="{% url 'pricing' %}">Pricing</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link btn btn-sm btn-dark text-white" href="{% url 'enquiry' %}">Enquiry</a>

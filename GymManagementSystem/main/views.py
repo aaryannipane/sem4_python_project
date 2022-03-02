@@ -9,7 +9,8 @@ def home(request):
     banners = models.Banners.objects.all()
     # to fetch only three row
     services = models.Service.objects.all()[:3]
-    return render(request, 'home.html', {'banners': banners, 'services':services})
+    galleryImages = models.GalleryImage.objects.all().order_by('-id')[:9]
+    return render(request, 'home.html', {'banners': banners, 'services':services, 'gallery': galleryImages})
 
 
 # view with get method
