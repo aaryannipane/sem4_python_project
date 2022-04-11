@@ -55,7 +55,8 @@ def pricing(req):
     plans = models.SubPlan.objects.all()
     dfeature = models.SubPlanFeature.objects.all()
     return render(req, 'pricing.html', {'plans':plans, 'dfeature':dfeature})
+
 # Signup 
 def signup(request):
-    form=forms.signup
+    form=forms.SignUp
     return render(request, 'registration/signup.html', {'form':form})

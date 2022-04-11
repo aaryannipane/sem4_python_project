@@ -9,7 +9,8 @@ class EnquiryForm(forms.ModelForm):
     class Meta:
         model = models.Enquiry
         fields = ('name', 'email', 'detail')
-class signup(UserCreationForm): 
+        
+class SignUp(UserCreationForm): 
     class meta:
         model=User
         fields=('first_name', 'last_name','email','username','password1','password2')
