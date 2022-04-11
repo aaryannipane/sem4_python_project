@@ -1,8 +1,12 @@
+from contextlib import nullcontext
+from gettext import NullTranslations
 from django import forms
 from django.shortcuts import render
+from pkg_resources import NullProvider
 import service_identity
 from . import models
 from . import forms
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def home(request):
@@ -52,11 +56,23 @@ def gallery_detail(req, id):
 
 # subscription plan
 def pricing(req):
-    plans = models.SubPlan.objects.all()
+    plan = models.SubPlan.objects.all().order_by('price')
     dfeature = models.SubPlanFeature.objects.all()
-    return render(req, 'pricing.html', {'plans':plans, 'dfeature':dfeature})
+    return render(req, 'pricing.html', {'plans':plan, 'dfeature':dfeature})
 
 # Signup 
 def signup(request):
+    msg=None      
+    if request.method=='POST':
+       form=forms.SignUp(request.POST)
+       if form.is_valid():
+           form.save()
+           msg='thank you for register.'
+
     form=forms.SignUp
-    return render(request, 'registration/signup.html', {'form':form})
+    return render(request,'registration/signup.html', {'form':form,'msg':msg})
+
+# Checkout 
+def checkout(request,plan_id):
+    planDetail = models.SubPlan.objects.get(pk=plan_id)
+    return render(request, 'checkout.html', {'plans':planDetail})
