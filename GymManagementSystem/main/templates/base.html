@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" integrity="sha512-Oy+sz5W86PK0ZIkawrG0iv7XwWhYecM3exvUtMKNJMekGFJtVAhibhRPTpmyTj8+lJCkmWfnpxKgT2OopquBHA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- jquery -->
     <!-- <script src="assets/jquery-3.6.0.min.js"></script> -->
-	<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'jquery-3.6.0.min.js' %}"></script>
     <title>Home - ATMA GYM</title>
   </head>
   <body>
@@ -44,7 +44,7 @@
 	          </a>
 	          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
 				{% if not request.user.is_authenticated %}
-				<li><a class="dropdown-item" href="#">Register</a></li>
+				<li><a class="dropdown-item" href="{% url 'signup' %}">Register</a></li>
 	            <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
 				{% else %}
 	            <!-- <li><hr class="dropdown-divider"></li> -->
