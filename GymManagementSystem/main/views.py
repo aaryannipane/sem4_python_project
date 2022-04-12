@@ -75,4 +75,4 @@ def signup(request):
 # Checkout 
 def checkout(request,plan_id):
     planDetail = models.SubPlan.objects.get(pk=plan_id)
-    return render(request, 'checkout.html', {'plans':planDetail})
+    return render(request, 'checkout.html', {'plan':planDetail})
