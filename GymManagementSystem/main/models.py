@@ -3,6 +3,7 @@ from turtle import title
 from django.db import models
 from django.utils.html import mark_safe
 from pygments import highlight
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -104,3 +105,31 @@ class SubPlanFeature(models.Model):
     
     def __str__(self):
         return self.title
+
+# package discount
+class PlanDiscount(models.Model):
+    subplan = models.ForeignKey(SubPlan, on_delete=models.CASCADE, null=True)
+    total_months = models.IntegerField()
+    total_discount = models.IntegerField()
+    
+    def __str__(self):
+        return str(self.total_months)
+
+# subscriber 
+class Subscriber(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    mobile = models.CharField(max_length=20)
+    address = models.TextField()
+    img = models.ImageField(upload_to = "subs/")
+
+    def __str__(self):
+        return str(self.user)
+
+    def image_tag(self):
+        return mark_safe('<img src="%s" width="80" />' % (self.img.url))
+
+# subscription
+class Subscription(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    plan = models.ForeignKey(SubPlan, on_delete=models.CASCADE, null=True)
+    price = models.CharField(max_length=50)
