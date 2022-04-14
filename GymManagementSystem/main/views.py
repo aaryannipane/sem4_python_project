@@ -64,12 +64,12 @@ def pricing(req):
 def signup(request):
     msg=None      
     if request.method=='POST':
-       form=forms.SignUp(request.POST)
+       form=forms.SignUpForm(request.POST)
        if form.is_valid():
            form.save()
            msg='thank you for register.'
 
-    form=forms.SignUp
+    form=forms.SignUpForm()
     return render(request,'registration/signup.html', {'form':form,'msg':msg})
 
 # Checkout 
