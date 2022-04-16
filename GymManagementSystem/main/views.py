@@ -1,12 +1,14 @@
 from contextlib import nullcontext
 from gettext import NullTranslations
+from turtle import title
 from django import forms
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from pkg_resources import NullProvider
 import service_identity
 from . import models
 from . import forms
 from django.contrib.auth.forms import UserCreationForm
+import stripe
 
 # Create your views here.
 def home(request):
@@ -76,3 +78,45 @@ def signup(request):
 def checkout(request,plan_id):
     planDetail = models.SubPlan.objects.get(pk=plan_id)
     return render(request, 'checkout.html', {'plan':planDetail})
+
+
+stripe.api_key = 'sk_test_51KpDRiSAfp54Ib8XwSTqi5ON9tTBtfCTvZ9ha7W2l8vWmoYbbw1Q7BNdg1K9VHtSONnJL6WRpOZ4L1ZUiXMZgzea00HllVD4F6'
+
+def checkout_session(req, plan_id):
+    plan = models.SubPlan.objects.get(pk=plan_id)
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=[{
+            'price_data': {
+                'currency': 'inr',
+                'product_data': {
+                'name': plan.title,
+                },
+                'unit_amount': plan.price*100,
+            },
+            'quantity': 1,
+        }],
+        mode='payment',
+        success_url='http://localhost:5555/pay_success?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url='http://localhost:5555/pay_cancel',
+        client_reference_id=plan_id,
+    )
+
+    return redirect(session.url, code=303)
+
+# success
+def pay_success(req):
+    session = stripe.checkout.Session.retrieve(req.GET['session_id'])
+    plan_id = session.client_reference_id
+    plan = models.SubPlan.objects.get(pk=plan_id)
+    user = req.user
+    models.Subscription.objects.create(
+        plan=plan,
+        user=user,
+        price=plan.price
+    )
+    return render(req, 'success.html')
+
+# cancel
+def pay_cancel(req):
+    return render(req, 'cancel.html')
